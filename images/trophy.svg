@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="trophyBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#0a071d"/>
+    </linearGradient>
+    <linearGradient id="goldTrophy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#eab308"/>
+      <stop offset="100%" stop-color="#ca8a04"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="300" rx="16" fill="url(#trophyBg)"/>
+
+  <!-- Light Rays / Starburst -->
+  <circle cx="200" cy="140" r="110" fill="#facc15" opacity="0.1"/>
+
+  <!-- Trophy Handles -->
+  <path d="M 140 100 C 100 100, 100 160, 145 165" fill="none" stroke="url(#goldTrophy)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 260 100 C 300 100, 300 160, 255 165" fill="none" stroke="url(#goldTrophy)" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Trophy Cup Body -->
+  <path d="M 135 80 L 265 80 C 265 145, 225 185, 200 190 C 175 185, 135 145, 135 80 Z" fill="url(#goldTrophy)"/>
+  <ellipse cx="200" cy="80" rx="65" ry="12" fill="#fef08a"/>
+
+  <!-- Star Icon on Cup -->
+  <polygon points="200,105 205,120 220,120 208,130 212,145 200,135 188,145 192,130 180,120 195,120" fill="#713f12"/>
+
+  <!-- Stem & Base -->
+  <path d="M 190 190 L 210 190 L 215 215 L 185 215 Z" fill="url(#goldTrophy)"/>
+  <rect x="160" y="215" width="80" height="15" rx="3" fill="#ca8a04"/>
+  <rect x="145" y="230" width="110" height="25" rx="5" fill="#1e293b" stroke="#eab308" stroke-width="2"/>
+  <text x="200" y="247" text-anchor="middle" fill="#facc15" font-family="sans-serif" font-weight="900" font-size="12">#1 LEGEND</text>
+
+  <!-- Crown on Top -->
+  <path d="M 175 60 L 182 45 L 200 55 L 218 45 L 225 60 Z" fill="#ffd700" stroke="#ca8a04" stroke-width="1.5"/>
+
+  <!-- Sparkles -->
+  <text x="120" y="65" fill="#facc15" font-size="20">✨</text>
+  <text x="270" y="65" fill="#facc15" font-size="20">✨</text>
+
+  <!-- Badge -->
+  <rect x="25" y="25" width="180" height="30" rx="15" fill="#eab308" fill-opacity="0.2" stroke="#eab308" stroke-width="1.5"/>
+  <text x="115" y="45" text-anchor="middle" fill="#facc15" font-family="sans-serif" font-weight="bold" font-size="12">🏆 HALL OF FAME BROTHER</text>
+</svg>

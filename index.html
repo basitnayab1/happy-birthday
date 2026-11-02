@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Birthday Abuzar! 🎂 2 November | 3D Experience</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+
+  <!-- Modern Styling -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- 3D & Animation Libraries (Local Offline + CDN Fallback) -->
+  <script src="js/vendor/three.min.js"></script>
+  <script>if (!window.THREE) document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');</script>
+  <script src="js/vendor/OrbitControls.js"></script>
+  <script>if (!THREE.OrbitControls) document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"><\/script>');</script>
+  <script src="js/vendor/confetti.browser.min.js"></script>
+  <script>if (!window.confetti) document.write('<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"><\/script>');</script>
+</head>
+<body>
+
+  <!-- WebGL 3D Canvas -->
+  <div id="webgl-container"></div>
+
+  <!-- Screen UI Overlay -->
+  <div class="ui-layer">
+
+    <!-- TOP NAVIGATION -->
+    <header class="top-nav interactive">
+      <div class="brand-badge">
+        <span class="crown-icon">👑</span>
+        <div class="brand-info">
+          <span class="brand-name">ABUZAR • 2 NOV</span>
+          <span class="brand-sub">Special Birthday Edition</span>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <!-- Balloon pop score -->
+        <div class="glass-btn" id="balloon-counter" title="Click or tap 3D balloons to pop them!">
+          🎈 0 Popped
+        </div>
+
+        <!-- Music Toggle with Animated Equalizer -->
+        <button class="glass-btn" id="btn-toggle-music" title="Toggle Celebration Music">
+          <div class="equalizer paused">
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+          </div>
+          <span>Music</span>
+        </button>
+
+        <!-- Fullscreen Button -->
+        <button class="glass-btn" id="btn-fullscreen" title="Toggle Fullscreen">⛶</button>
+      </div>
+    </header>
+
+    <!-- BOTTOM INTERACTIVE DOCK -->
+    <div class="bottom-dock-container interactive">
+      <div class="hint-pill">
+        <span>✨ Drag to rotate 3D cake • Tap balloons to pop • Tap Gift Box!</span>
+      </div>
+
+      <nav class="bottom-dock">
+        <!-- Blow / Relight Candles -->
+        <button class="action-btn primary" id="btn-blow-candles" title="Make a wish and blow out candles">
+          <span class="btn-icon">💨</span>
+          <span class="btn-label">Blow Candles</span>
+        </button>
+
+        <!-- Cut Cake -->
+        <button class="action-btn gold" id="btn-cut-cake" title="Slice the birthday cake with 3D knife">
+          <span class="btn-icon">🍰</span>
+          <span class="btn-label">Cut Cake</span>
+        </button>
+
+        <!-- Launch Fireworks -->
+        <button class="action-btn" id="btn-fireworks" title="Shoot celebration rockets in 3D sky">
+          <span class="btn-icon">🎆</span>
+          <span class="btn-label">Fireworks</span>
+        </button>
+
+        <!-- DJ Party Mode -->
+        <button class="action-btn party" id="btn-party-mode" title="Toggle disco lights & party beats">
+          <span class="btn-icon">🪩</span>
+          <span class="btn-label">Party Mode</span>
+        </button>
+
+        <div class="dock-divider"></div>
+
+        <!-- Camera Angles -->
+        <button class="action-btn" id="btn-cam-views" title="Switch 3D Camera Views">
+          <span class="btn-icon">🎥</span>
+          <span class="btn-label">Camera</span>
+        </button>
+
+        <!-- Memories Wall -->
+        <button class="action-btn" id="btn-memories" title="View memorable moments with Abuzar">
+          <span class="btn-icon">📸</span>
+          <span class="btn-label">Memories</span>
+        </button>
+
+        <!-- Letter to Abuzar -->
+        <button class="action-btn" id="btn-letter" title="Read heartfelt birthday letter for Abuzar">
+          <span class="btn-icon">💌</span>
+          <span class="btn-label">Letter</span>
+        </button>
+
+        <!-- Gift Vouchers -->
+        <button class="action-btn gold" id="btn-gift" title="Open Birthday Privileges Gift Box">
+          <span class="btn-icon">🎁</span>
+          <span class="btn-label">Gift Box</span>
+        </button>
+
+        <!-- Share / Wish Card -->
+        <button class="action-btn" id="btn-share" title="Share Birthday Greeting">
+          <span class="btn-icon">📲</span>
+          <span class="btn-label">Share</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- CINEMATIC INTRO SCREEN -->
+  <div id="intro-screen">
+    <div class="intro-card">
+      <div class="intro-tag">🎂 2nd November Special</div>
+      <h1 class="intro-title">HAPPY BIRTHDAY<br>ABUZAR!</h1>
+      <p class="intro-sub">
+        To the most brilliant colleague, desk partner, and brother! A custom 3D celebration awaits you.
+      </p>
+
+      <div class="intro-meta">
+        <div class="meta-pill">💼 Office Legend</div>
+        <div class="meta-pill">☕ Chai Break Partner</div>
+        <div class="meta-pill">✨ 2 November</div>
+      </div>
+
+      <button class="btn-start" id="btn-start-celebration">
+        <span>ENTER 3D CELEBRATION</span>
+        <span style="font-size: 1.4rem;">🎉</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast">
+    <div id="toast-msg">🎉 Welcome Abuzar!</div>
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- 1. GIFT BOX MODAL: OFFICIAL VIP PRIVILEGES & VOUCHERS -->
+  <div class="modal-overlay" id="modal-gift">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2 class="modal-title">🎁 Birthday VIP Privileges</h2>
+          <span class="modal-subtitle">Official privileges & vouchers exclusively for Abuzar</span>
+        </div>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 16px;">
+          As your colleague, work partner, and brother, here are 4 non-negotiable lifetime vouchers signed and stamped for your special day:
+        </p>
+
+        <div class="vouchers-grid">
+          <!-- Voucher 1 -->
+          <div class="voucher-card">
+            <span class="voucher-badge">Pass #01 • Valid 30 Days</span>
+            <h3 class="voucher-title">💼 Meeting & Standup Immunity</h3>
+            <p class="voucher-desc">
+              100% exempt from speaking in long meetings or turning your camera on. "Abuzar has network issue" cover is guaranteed!
+            </p>
+            <div class="voucher-stamp">APPROVED</div>
+          </div>
+
+          <!-- Voucher 2 -->
+          <div class="voucher-card">
+            <span class="voucher-badge">Pass #02 • Unlimited</span>
+            <h3 class="voucher-title">☕ Unlimited Office Chai / Coffee</h3>
+            <p class="voucher-desc">
+              The 15-minute tea break that turns into a 45-minute deep life discussion. Fully sponsored whenever you need a recharge!
+            </p>
+            <div class="voucher-stamp">VIP</div>
+          </div>
+
+          <!-- Voucher 3 -->
+          <div class="voucher-card">
+            <span class="voucher-badge">Pass #03 • Emergency</span>
+            <h3 class="voucher-title">⏰ 9 AM Swipe / Punch-in Shield</h3>
+            <p class="voucher-desc">
+              Stuck in morning traffic or snoozed alarms? Don't worry, your punch-in cover and status will be defended with pride!
+            </p>
+            <div class="voucher-stamp">HEROIC</div>
+          </div>
+
+          <!-- Voucher 4 -->
+          <div class="voucher-card">
+            <span class="voucher-badge">Pass #04 • Full Access</span>
+            <h3 class="voucher-title">🍕 Friday Biryani & Lunch Treat</h3>
+            <p class="voucher-desc">
+              Special birthday treat pass. Whatever you crave for office lunch today, sponsored and celebrated in grand style!
+            </p>
+            <div class="voucher-stamp">PAID</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MEMORIES & POLAROIDS GALLERY MODAL -->
+  <div class="modal-overlay" id="modal-memories">
+    <div class="modal-content" style="max-width: 820px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2 class="modal-title">📸 Work & Brotherhood Chronicles</h2>
+          <span class="modal-subtitle">Iconic daily & office moments with Abuzar</span>
+        </div>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Photo upload bar -->
+        <div class="photo-upload-bar">
+          <span style="font-size: 0.88rem; color: #cbd5e1;">Want to add your real photos with Abuzar?</span>
+          <label class="upload-btn-label">
+            <span>📷 Upload Real Photo</span>
+            <input type="file" id="custom-photo-input" accept="image/*" style="display: none;">
+          </label>
+        </div>
+
+        <div class="memories-grid">
+          <!-- Memory 1 -->
+          <div class="polaroid-card">
+            <div class="pin"></div>
+            <div class="polaroid-img-box">
+              <img src="images/chai.svg" alt="Chai Break">
+            </div>
+            <div class="polaroid-caption">The 4 PM Chai Break</div>
+            <div class="polaroid-desc">The official survival fuel of the 9-to-6 grind. 15-minute tea break solving all bugs.</div>
+          </div>
+
+          <!-- Memory 2 -->
+          <div class="polaroid-card">
+            <div class="pin"></div>
+            <div class="polaroid-img-box">
+              <img src="images/exam.svg" alt="Deadline Panic">
+            </div>
+            <div class="polaroid-caption">Deadline & Sprint Panic</div>
+            <div class="polaroid-desc">Deploying to production at 5:59 PM on a Friday. Pure adrenaline and teamwork!</div>
+          </div>
+
+          <!-- Memory 3 -->
+          <div class="polaroid-card">
+            <div class="pin"></div>
+            <div class="polaroid-img-box">
+              <img src="images/alarm.svg" alt="9 AM Punch-in">
+            </div>
+            <div class="polaroid-caption">9 AM Punch-in Grand Prix</div>
+            <div class="polaroid-desc">Waking up at 8:40 AM and calculating if it's physically possible to beat the biometric clock.</div>
+          </div>
+
+          <!-- Memory 4 -->
+          <div class="polaroid-card">
+            <div class="pin"></div>
+            <div class="polaroid-img-box">
+              <img src="images/gaming.svg" alt="Post-work Gaming">
+            </div>
+            <div class="polaroid-caption">After-Hours Chill & Gaming</div>
+            <div class="polaroid-desc">Shutting the laptops, forgetting spreadsheets, and jumping straight into chill gaming sessions.</div>
+          </div>
+
+          <!-- Memory 5 -->
+          <div class="polaroid-card">
+            <div class="pin"></div>
+            <div class="polaroid-img-box">
+              <img src="images/maggi.svg" alt="Late Munchies">
+            </div>
+            <div class="polaroid-caption">Late Night Munchies</div>
+            <div class="polaroid-desc">When overtime or late evening hits, a quick steaming bowl of Maggi becomes top-tier dining.</div>
+          </div>
+
+          <!-- Memory 6 -->
+          <div class="polaroid-card">
+            <div class="pin"></div>
+            <div class="polaroid-img-box">
+              <img src="images/trophy.svg" alt="Colleague of the Decade">
+            </div>
+            <div class="polaroid-caption">Colleague of the Decade 🏆</div>
+            <div class="polaroid-desc">More than just a coworker — a true brother who makes every single day memorable!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. HEARTFELT LETTER MODAL -->
+  <div class="modal-overlay" id="modal-letter">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2 class="modal-title">💌 A Letter For Abuzar</h2>
+          <span class="modal-subtitle">Straight from your colleague & brother</span>
+        </div>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="letter-box">
+          <div class="letter-salutation">Dear Abuzar bhai,</div>
+          <p>
+            Log kehte hain ke office mein sirf kaam aur formal rishtey hote hain, lekin mujhe office mein ek behtareen colleague ke sath sath ek sacha bhai aur dost mil gaya!
+          </p>
+          <br>
+          <p>
+            Subah ki meeting se le kar shaam ki chai tak, tight deadlines ka pressure sath face karna, daily lunch par gup shup aur kaam ke darmiyan hansna mazak — office ka har din tumhari company ki wajah se aasan aur energetic ban jata hai.
+          </p>
+          <br>
+          <p>
+            Aj <strong>2 November</strong> tumhara din hai! Meri dua hai ke yeh saal tumhare career aur zindagi ka sab se successful saal ho. Behtareen promotions, unginat khushiyan, zabardast health, aur har wo maqsad jo tum ne set kiya hai, Allah pura kare.
+          </p>
+          <br>
+          <p>
+            Always stay humble, smiling, and legendary the way you are!
+            Happy Birthday, my brother and partner-in-crime! 🎂❤️
+          </p>
+          <div class="letter-sign">
+            — Tumhara Dost & Colleague 💼✨
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. CAMERA PRESETS MODAL -->
+  <div class="modal-overlay" id="modal-camera">
+    <div class="modal-content" style="max-width: 480px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2 class="modal-title">🎥 Camera Angles</h2>
+          <span class="modal-subtitle">Choose your view of the 3D scene</span>
+        </div>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body" style="display: flex; flex-direction: column; gap: 12px;">
+        <button class="glass-btn cam-preset-btn" data-view="overview" style="justify-content: flex-start; padding: 14px 20px;">
+          <span style="font-size: 1.3rem;">🌐</span>
+          <span><strong>Cinematic 360 Orbit</strong> (Full Overview)</span>
+        </button>
+        <button class="glass-btn cam-preset-btn" data-view="cake" style="justify-content: flex-start; padding: 14px 20px;">
+          <span style="font-size: 1.3rem;">🎂</span>
+          <span><strong>Cake Close-Up</strong> (Candles & Frosting View)</span>
+        </button>
+        <button class="glass-btn cam-preset-btn" data-view="gift" style="justify-content: flex-start; padding: 14px 20px;">
+          <span style="font-size: 1.3rem;">🎁</span>
+          <span><strong>Mystery Gift View</strong> (Pedestal Focus)</span>
+        </button>
+        <button class="glass-btn cam-preset-btn" data-view="balloons" style="justify-content: flex-start; padding: 14px 20px;">
+          <span style="font-size: 1.3rem;">🎈</span>
+          <span><strong>Sky & Balloons View</strong> (Popping Angle)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. SHARE / GREETING CARD MODAL -->
+  <div class="modal-overlay" id="modal-share">
+    <div class="modal-content" style="max-width: 520px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2 class="modal-title">📲 Birthday Greeting Card</h2>
+          <span class="modal-subtitle">Share this special website with Abuzar</span>
+        </div>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="background: linear-gradient(135deg, #1f113a, #361752); border: 2px solid #ffd700; border-radius: 20px; padding: 24px; text-align: center; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+          <div style="font-size: 2.4rem; margin-bottom: 8px;">👑 🎂 🎈</div>
+          <h3 style="color: #ffd700; font-size: 1.8rem; font-weight: 800; margin-bottom: 6px;">HAPPY BIRTHDAY ABUZAR!</h3>
+          <p style="color: #ffffff; font-size: 1rem; font-weight: 600; margin-bottom: 12px;">2nd November Special Edition</p>
+          <div style="display: inline-block; background: rgba(255,255,255,0.1); padding: 4px 16px; border-radius: 999px; font-size: 0.85rem; color: #fbcfe8;">
+            From Your Colleague & Brother
+          </div>
+        </div>
+
+        <button class="btn-start" id="btn-copy-wish" style="margin-bottom: 10px;">
+          <span>📋 COPY BIRTHDAY WISH TEXT</span>
+        </button>
+        <p style="text-align: center; font-size: 0.8rem; color: #94a3b8;">
+          You can copy and send directly on WhatsApp, Instagram, or Slack!
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Logic Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/scene3d.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

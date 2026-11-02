@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="alarmBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d132c"/>
+      <stop offset="100%" stop-color="#110517"/>
+    </linearGradient>
+    <radialGradient id="bellGrad" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ff7675"/>
+      <stop offset="100%" stop-color="#d63031"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="400" height="300" rx="16" fill="url(#alarmBg)"/>
+
+  <!-- Sound Waves (Vibrating) -->
+  <path d="M 90 100 Q 70 140 90 180" fill="none" stroke="#ff7675" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 65 85 Q 40 140 65 195" fill="none" stroke="#ff7675" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 310 100 Q 330 140 310 180" fill="none" stroke="#ff7675" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 335 85 Q 360 140 335 195" fill="none" stroke="#ff7675" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Alarm Clock Bells -->
+  <circle cx="140" cy="95" r="32" fill="url(#bellGrad)"/>
+  <circle cx="260" cy="95" r="32" fill="url(#bellGrad)"/>
+  <rect x="188" y="70" width="24" height="20" rx="6" fill="#636e72"/>
+  <circle cx="200" cy="65" r="8" fill="#d63031"/>
+
+  <!-- Clock Feet -->
+  <line x1="145" y1="220" x2="125" y2="250" stroke="#636e72" stroke-width="10" stroke-linecap="round"/>
+  <line x1="255" y1="220" x2="275" y2="250" stroke="#636e72" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Main Clock Body -->
+  <circle cx="200" cy="155" r="75" fill="#d63031" stroke="#fab1a0" stroke-width="4"/>
+  <circle cx="200" cy="155" r="62" fill="#ffffff"/>
+
+  <!-- Clock Face showing 8:55 AM -->
+  <line x1="200" y1="155" x2="200" y2="105" stroke="#2d3436" stroke-width="5" stroke-linecap="round"/>
+  <line x1="200" y1="155" x2="160" y2="162" stroke="#2d3436" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="200" cy="155" r="6" fill="#d63031"/>
+
+  <!-- Office Tie & Tag hanging -->
+  <path d="M 195 210 L 205 210 L 210 260 L 200 270 L 190 260 Z" fill="#0984e3"/>
+
+  <!-- Badge -->
+  <rect x="25" y="25" width="180" height="30" rx="15" fill="#ff7675" fill-opacity="0.2" stroke="#ff7675" stroke-width="1.5"/>
+  <text x="115" y="45" text-anchor="middle" fill="#ff7675" font-family="sans-serif" font-weight="bold" font-size="12">⏰ 9 AM PUNCH-IN RACE</text>
+</svg>

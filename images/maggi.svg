@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1136"/>
+      <stop offset="100%" stop-color="#0c0717"/>
+    </linearGradient>
+    <linearGradient id="steam" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ffaa00" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ffaa00" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="bowlGrad" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#ff6b6b"/>
+      <stop offset="100%" stop-color="#991b1b"/>
+    </radialGradient>
+    <linearGradient id="noodleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" rx="16" fill="url(#bg)"/>
+  
+  <!-- Desk Glow -->
+  <ellipse cx="200" cy="245" rx="150" ry="35" fill="#f59e0b" opacity="0.12"/>
+  <rect x="50" y="240" width="300" height="8" rx="4" fill="#33244d"/>
+
+  <!-- Clock showing 2:15 AM -->
+  <g transform="translate(320, 60)">
+    <circle r="26" fill="#1f1638" stroke="#f59e0b" stroke-width="2.5"/>
+    <line x1="0" y1="0" x2="0" y2="-15" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="12" y2="5" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+    <circle r="3" fill="#ffd700"/>
+    <text x="0" y="38" text-anchor="middle" fill="#f59e0b" font-family="sans-serif" font-weight="bold" font-size="11">2:15 AM</text>
+  </g>
+
+  <!-- Steam Wafts -->
+  <path d="M 170 140 Q 160 105 175 80 T 170 45" fill="none" stroke="url(#steam)" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 205 135 Q 220 100 200 70 T 215 35" fill="none" stroke="url(#steam)" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 235 140 Q 245 105 230 75 T 240 45" fill="none" stroke="url(#steam)" stroke-width="4.5" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Bowl Base -->
+  <ellipse cx="200" cy="225" rx="90" ry="25" fill="#581c87" opacity="0.4"/>
+  <path d="M 110 160 Q 110 230 200 230 Q 290 230 290 160 Z" fill="url(#bowlGrad)"/>
+  
+  <!-- Bowl Rim -->
+  <ellipse cx="200" cy="160" rx="90" ry="22" fill="#b91c1c"/>
+  <ellipse cx="200" cy="160" rx="84" ry="18" fill="#ca8a04"/>
+
+  <!-- Steaming Noodles -->
+  <path d="M 130 160 Q 155 145 180 160 Q 210 175 240 158 Q 260 150 270 160" fill="none" stroke="url(#noodleGrad)" stroke-width="5.5" stroke-linecap="round"/>
+  <path d="M 140 155 Q 165 170 195 152 Q 225 140 255 162" fill="none" stroke="url(#noodleGrad)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 150 165 Q 185 145 220 165 Q 245 175 260 155" fill="none" stroke="url(#noodleGrad)" stroke-width="4.5" stroke-linecap="round"/>
+
+  <!-- Veggies & toppings -->
+  <circle cx="165" cy="158" r="5" fill="#22c55e"/>
+  <circle cx="235" cy="156" r="6" fill="#22c55e"/>
+  <circle cx="195" cy="165" r="4.5" fill="#ef4444"/>
+  <circle cx="215" cy="152" r="5" fill="#ef4444"/>
+  <circle cx="180" cy="152" r="4" fill="#3b82f6"/>
+
+  <!-- Chopsticks -->
+  <line x1="160" y1="210" x2="280" y2="90" stroke="#fef08a" stroke-width="4.5" stroke-linecap="round"/>
+  <line x1="175" y1="215" x2="295" y2="105" stroke="#fef08a" stroke-width="4.5" stroke-linecap="round"/>
+
+  <!-- Glow badge -->
+  <rect x="25" y="25" width="130" height="30" rx="15" fill="#ffaa00" fill-opacity="0.15" stroke="#ffaa00" stroke-width="1.5"/>
+  <text x="90" y="45" text-anchor="middle" fill="#ffd700" font-family="sans-serif" font-weight="bold" font-size="12">🍜 2 AM MAGGI</text>
+</svg>
